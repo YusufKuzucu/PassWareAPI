@@ -12,10 +12,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUIDal : IUIDal
     {
-        public async Task AddAsync(UI entity)
+        public async Task AddAsync(UI entity, string createdBy)
         {
             using (PASSWareDbContext contex=new PASSWareDbContext())
             {
+                entity.CreatedBy = createdBy;
+                entity.CreatedDate = DateTime.Now;
                 contex.UIs.Add(entity);
                 await contex.SaveChangesAsync();
             }
@@ -52,7 +54,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(UI entity)
+        public async Task UpdateAsync(UI entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
@@ -62,6 +64,8 @@ namespace DataAccess.Concrete.EntityFramework
                     uı.UIServerIP = entity.UIServerIP;
                     uı.UIServerUserName=entity.UIServerUserName;
                     uı.UIServerPassword=entity.UIServerPassword;
+                    uı.UpdatedBy = updatedBy;
+                    uı.UpdatedDate = DateTime.Now;
                     await context.SaveChangesAsync();
 
                 }

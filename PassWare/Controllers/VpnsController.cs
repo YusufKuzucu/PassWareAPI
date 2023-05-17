@@ -35,9 +35,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostVpn(Vpn vpn)
+        public async Task<IActionResult> PostVpn(Vpn vpn, string createdBy)
         {
-            var result = await _vpnService.AddVpn(vpn);
+            var result = await _vpnService.AddVpn(vpn, createdBy);
             if (result.Success)
             {
                 return Ok(result);
@@ -59,9 +59,9 @@ namespace PassWare.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateVpn(Vpn vpn)
+        public async Task<IActionResult> UpdateVpn(Vpn vpn, string updatedBy)
         {
-            var result = await _vpnService.UpdateVpn(vpn);
+            var result = await _vpnService.UpdateVpn(vpn, updatedBy);
             if (result.Success)
             {
                 return Ok(result);

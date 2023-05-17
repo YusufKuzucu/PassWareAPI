@@ -10,11 +10,10 @@ namespace Business.Abstract
 {
     public interface IUIService
     {
-        Task<IResult> AddUI(UI uI);
+        Task<IResult> AddUI(UI uI,string createdBy);
         Task<IResult> DeleteUI(int id);
-        Task<IResult> UpdateUI(UI uI);
+        Task<IResult> UpdateUI(UI uI, string updatedBy);
         Task<IDataResult<List<UI>>> GetAllUI();
         Task<IDataResult<UI>> GetUI(int id);
-
     }
 }

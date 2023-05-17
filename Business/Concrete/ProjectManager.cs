@@ -18,9 +18,9 @@ namespace Business.Concrete
         {
             _projectDal = projectDal;
         }
-        public async Task<IResult> AddProject(Project project)
+        public async Task<IResult> AddProject(Project project,string createdBy)
         {
-           await _projectDal.AddAsync(project);
+           await _projectDal.AddAsync(project, createdBy);
             return new SuccessResult();
 
         }
@@ -42,9 +42,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Project>(await _projectDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task<IResult> UpdateProject(Project project)
+        public async Task<IResult> UpdateProject(Project project, string updatedBy)
         {
-           await _projectDal.UpdateAsync(project);
+           await _projectDal.UpdateAsync(project, updatedBy);
             return new SuccessResult();
         }
     }

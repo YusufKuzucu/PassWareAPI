@@ -17,9 +17,9 @@ namespace Business.Concrete
         {
             _jumpDal = jumpDal;
         }
-        public async Task<IResult> AddJump(Jump jump)
+        public async Task<IResult> AddJump(Jump jump, string createdBy)
         {
-            await _jumpDal.AddAsync(jump);
+            await _jumpDal.AddAsync(jump, createdBy);
             return new SuccessResult();
 
         }
@@ -41,9 +41,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Jump>(await _jumpDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task<IResult> UpdateJump(Jump jump)
+        public async Task<IResult> UpdateJump(Jump jump, string updatedBy)
         {
-            await _jumpDal.UpdateAsync(jump);
+            await _jumpDal.UpdateAsync(jump, updatedBy);
             return new SuccessResult();
         }
     }

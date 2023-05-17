@@ -10,9 +10,9 @@ namespace Business.Abstract
 {
     public interface ICommunicationService
     {
-        Task<IResult> AddCommunication(Communication communication);
+        Task<IResult> AddCommunication(Communication communication,string createdBy);
         Task<IResult> DeleteCommunication(int id);
-        Task<IResult> UpdateCommunication(Communication communication);
+        Task<IResult> UpdateCommunication(Communication communication, string updatedBy);
         Task<IDataResult<List<Communication>>> GetAllCommunication();
         Task<IDataResult<Communication>> GetCommunication(int id);
     }

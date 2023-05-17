@@ -10,9 +10,9 @@ namespace Business.Abstract
 {
     public interface IVpnService
     {
-        Task<IResult> AddVpn(Vpn vpn); 
+        Task<IResult> AddVpn(Vpn vpn,string createdBy); 
         Task<IResult> DeleteVpn(int id);
-        Task<IResult> UpdateVpn(Vpn vpn);
+        Task<IResult> UpdateVpn(Vpn vpn, string updatedBy);
         Task<IDataResult<List<Vpn>>> GetAllVpn(); 
         Task<IDataResult<Vpn>> GetVpn(int id);
     }

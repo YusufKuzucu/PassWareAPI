@@ -13,10 +13,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProjectDal : IProjectDal
     {
-        public async Task AddAsync(Project entity)
+        public async Task AddAsync(Project entity, string createdBy)
         {
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
+                entity.CreatedBy = createdBy;
+                entity.CreatedDate = DateTime.Now;
                 context.Projects.Add(entity);
                 await context.SaveChangesAsync();
             }
@@ -54,7 +56,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(Project entity)
+        public async Task UpdateAsync(Project entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
@@ -65,6 +67,8 @@ namespace DataAccess.Concrete.EntityFramework
                     project.ProjectServerIP = entity.ProjectServerIP;
                     project.ProjectServerUserName = entity.ProjectServerUserName;
                     project.ProjectServerPassword = entity.ProjectServerPassword;
+                    project.UpdatedBy = updatedBy;
+                    project.UpdatedDate = DateTime.Now;
 
                     await context.SaveChangesAsync();
 

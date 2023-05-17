@@ -27,9 +27,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostJump(Jump jump)
+        public async Task<IActionResult> PostJump(Jump jump, string createdBy)
         {
-            var result = await _jumpService.AddJump(jump);
+            var result = await _jumpService.AddJump(jump, createdBy);
             if (result.Success)
             {
                 return Ok(result);
@@ -37,9 +37,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateJump(Jump jump)
+        public async Task<IActionResult> UpdateJump(Jump jump, string updatedBy)
         {
-            var result = await _jumpService.UpdateJump(jump);
+            var result = await _jumpService.UpdateJump(jump, updatedBy);
             if (result.Success)
             {
                 return Ok(result);

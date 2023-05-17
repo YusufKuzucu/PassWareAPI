@@ -35,9 +35,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostCommunication(Communication communication)
+        public async Task<IActionResult> PostCommunication(Communication communication,string createdBy)
         {
-            var result = await _communicationService.AddCommunication(communication);
+            var result = await _communicationService.AddCommunication(communication, createdBy);
             if (result.Success)
             {
                 return Ok(result);
@@ -45,9 +45,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPut("Update")]
-        public async Task<IActionResult> PutCommunication(Communication communication)
+        public async Task<IActionResult> PutCommunication(Communication communication, string updatedBy)
         {
-            var result = await _communicationService.UpdateCommunication(communication);
+            var result = await _communicationService.UpdateCommunication(communication, updatedBy);
             if (result.Success)
             {
                 return Ok(result);

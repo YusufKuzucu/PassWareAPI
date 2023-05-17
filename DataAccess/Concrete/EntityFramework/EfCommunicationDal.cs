@@ -12,10 +12,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCommunicationDal : ICommunicationDal
     {
-        public async Task AddAsync(Communication entity)
+        public async Task AddAsync(Communication entity, string createdBy)
         {
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
+                entity.CreatedBy = createdBy;
+                entity.CreatedDate = DateTime.Now;
                 context.Communications.Add(entity);
                 await context.SaveChangesAsync();   
             }
@@ -52,7 +54,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(Communication entity)
+        public async Task UpdateAsync(Communication entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
@@ -63,6 +65,8 @@ namespace DataAccess.Concrete.EntityFramework
                     communication.InternalEmail = entity.InternalEmail;
                     communication.ExternalNumber = entity.ExternalNumber;
                     communication.ExternalEmail = entity.ExternalEmail;
+                    communication.UpdatedBy = updatedBy;
+                    communication.UpdatedDate = DateTime.Now;
                     await context.SaveChangesAsync();
                 }
             }

@@ -17,9 +17,9 @@ namespace Business.Concrete
         {
             _communicationDal = communicationDal;
         }
-        public async Task<IResult> AddCommunication(Communication communication)
+        public async Task<IResult> AddCommunication(Communication communication, string createdBy)
         {
-            await _communicationDal.AddAsync(communication);
+            await _communicationDal.AddAsync(communication, createdBy);
             return new SuccessResult();
         }
 
@@ -40,9 +40,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Communication>(await _communicationDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task<IResult> UpdateCommunication(Communication communication)
+        public async Task<IResult> UpdateCommunication(Communication communication, string updatedBy)
         {
-            await _communicationDal.UpdateAsync(communication);
+            await _communicationDal.UpdateAsync(communication, updatedBy);
             return new SuccessResult();
         }
     }

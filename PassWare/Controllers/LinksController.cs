@@ -35,9 +35,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostLink(Link link)
+        public async Task<IActionResult> PostLink(Link link,string createdBy)
         {
-            var result = await _linkService.AddLink(link);
+            var result = await _linkService.AddLink(link, createdBy);
             if (result.Success)
             {
                 return Ok(result);
@@ -59,9 +59,9 @@ namespace PassWare.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateLink(Link link)
+        public async Task<IActionResult> UpdateLink(Link link,string updatedBy)
         {
-            var result = await _linkService.UpdateLink(link);
+            var result = await _linkService.UpdateLink(link, updatedBy);
             if (result.Success)
             {
                 return Ok(result);

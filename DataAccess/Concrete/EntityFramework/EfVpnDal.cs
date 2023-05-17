@@ -13,10 +13,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfVpnDal : IVpnDal
     {
-        public async Task AddAsync(Vpn entity)
+        public async Task AddAsync(Vpn entity, string createdBy)
         {
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
+                entity.CreatedBy = createdBy;
+                entity.CreatedDate = DateTime.Now;
                 context.Vpns.Add(entity);
                 await context.SaveChangesAsync();
             }
@@ -53,7 +55,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(Vpn entity)
+        public async Task UpdateAsync(Vpn entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
@@ -63,6 +65,8 @@ namespace DataAccess.Concrete.EntityFramework
                     vpn.VpnProgramName = entity.VpnProgramName;
                     vpn.VpnPassword=entity.VpnPassword;
                     vpn.VpnConnectionAddress = entity.VpnConnectionAddress;
+                    vpn.UpdatedBy = updatedBy;
+                    vpn.UpdatedDate = DateTime.Now;
                     await context.SaveChangesAsync();
                 }
             }

@@ -15,6 +15,10 @@ namespace Entities.Concrete
         public string? JumpServerIP { get; set; }
         public string? JumpServerUserName { get; set; }
         public string? JumpServerPassword { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public int ProjectId { get; set; }
     }
 }

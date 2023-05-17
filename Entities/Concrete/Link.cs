@@ -14,6 +14,10 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public string? ConnectExplanation { get; set; }
         public byte[]? ConnectionInfo { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public int ProjectId { get; set; }
     }
 }

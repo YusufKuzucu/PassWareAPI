@@ -17,9 +17,9 @@ namespace Business.Concrete
         {
             _sqlDal = sqlDal;
         }
-        public async Task<IResult> AddSql(Sql sql)
+        public async Task<IResult> AddSql(Sql sql,string createdBy)
         {
-            await _sqlDal.AddAsync(sql);
+            await _sqlDal.AddAsync(sql, createdBy);
             return new SuccessResult();
         }
 
@@ -39,9 +39,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Sql>(await _sqlDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task<IResult> UpdateSql(Sql sql)
+        public async Task<IResult> UpdateSql(Sql sql, string updatedBy)
         {
-            await _sqlDal.UpdateAsync(sql);
+            await _sqlDal.UpdateAsync(sql, updatedBy);
             return new SuccessResult();
         }
     }

@@ -12,10 +12,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfSqlDal : ISqlDal
     {
-        public async Task AddAsync(Sql entity)
+        public async Task AddAsync(Sql entity, string createdBy)
         {
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
+                entity.CreatedBy = createdBy;
+                entity.CreatedDate = DateTime.Now;
                 context.Sqls.Add(entity);
                 await context.SaveChangesAsync();
             }
@@ -52,7 +54,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(Sql entity)
+        public async Task UpdateAsync(Sql entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
@@ -62,6 +64,8 @@ namespace DataAccess.Concrete.EntityFramework
                     sql.SqlServerIP = entity.SqlServerIP;
                     sql.SqlServerUserName = entity.SqlServerUserName;
                     sql.SqlServerPassword = entity.SqlServerPassword;
+                    sql.UpdatedBy = updatedBy;
+                    sql.UpdatedDate = DateTime.Now;
                     await context.SaveChangesAsync();
                 }
 

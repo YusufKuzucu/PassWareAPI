@@ -10,9 +10,9 @@ namespace Business.Abstract
 {
     public interface ILinkService
     {
-        Task<IResult> AddLink(Link link);
-        Task<IResult> DeleteLink(int id);
-        Task<IResult> UpdateLink(Link link);
+        Task<IResult> AddLink(Link link, string createdBy);
+        Task<IResult> DeleteLink(int id); 
+        Task<IResult> UpdateLink(Link link, string updatedBy);
         Task<IDataResult<List<Link>>> GetAllLink(); 
         Task<IDataResult<Link>> GetLink(int id);
     }

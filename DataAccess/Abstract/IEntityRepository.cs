@@ -13,8 +13,8 @@ namespace DataAccess.Abstract
     {
         Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null);
         Task<T> GetAsync(Expression<Func<T, bool>> filter);
-        Task AddAsync(T entity);
+        Task AddAsync(T entity,string createdBy);
         Task DeleteAsync(int id);
-        Task UpdateAsync(T entity);
+        Task UpdateAsync(T entity,string updatedBy);
     }
 }

@@ -12,10 +12,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfLinkDal : ILinkDal
     {
-        public async Task AddAsync(Link entity)
+        public async Task AddAsync(Link entity, string ceratedBy)
         {
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
+                entity.CreatedBy = ceratedBy;
+                entity.CreatedDate = DateTime.Now;
                 context.Links.Add(entity);
                 await context.SaveChangesAsync();  
             }
@@ -53,7 +55,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(Link entity)
+        public async Task UpdateAsync(Link entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
@@ -62,6 +64,8 @@ namespace DataAccess.Concrete.EntityFramework
                 {
                     link.ConnectExplanation = entity.ConnectExplanation;
                     link.ConnectionInfo = entity.ConnectionInfo;
+                    link.UpdatedBy = updatedBy;
+                    link.UpdatedDate = DateTime.Now;
                     await context.SaveChangesAsync();
 
                 }

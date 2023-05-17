@@ -36,9 +36,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostUI(UI uI)
+        public async Task<IActionResult> PostUI(UI uI,string createdBy)
         {
-            var result = await _uıService.AddUI(uI);
+            var result = await _uıService.AddUI(uI, createdBy);
             if (result.Success)
             {
                 return Ok(result);
@@ -60,9 +60,9 @@ namespace PassWare.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateUI(UI uI)
+        public async Task<IActionResult> UpdateUI(UI uI,string updatedBy)
         {
-            var result = await _uıService.UpdateUI(uI);
+            var result = await _uıService.UpdateUI(uI, updatedBy);
             if (result.Success)
             {
                 return Ok(result);

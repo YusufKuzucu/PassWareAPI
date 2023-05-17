@@ -16,6 +16,10 @@ namespace Entities.Concrete
         public string? InternalEmail { get; set; }
         public string? ExternalNumber { get; set; }
         public string? ExternalEmail { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public int ProjectId { get; set; }
     }
 }

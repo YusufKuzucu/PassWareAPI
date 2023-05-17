@@ -36,9 +36,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostProject(Project project)
+        public async Task<IActionResult> PostProject(Project project,string createdBy)
         {
-            var result = await _projectService.AddProject(project);
+            var result = await _projectService.AddProject(project, createdBy);
             if (result.Success)
             {
                 return Ok(result);
@@ -60,9 +60,9 @@ namespace PassWare.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateProject(Project project)
+        public async Task<IActionResult> UpdateProject(Project project,string updatedBy)
         {
-            var result = await _projectService.AddProject(project);
+            var result = await _projectService.UpdateProject(project, updatedBy);
             if (result.Success)
             {
                 return Ok(result);

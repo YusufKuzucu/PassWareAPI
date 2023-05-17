@@ -17,9 +17,9 @@ namespace Business.Concrete
         {
             _linkDal = linkDal;
         }
-        public async Task<IResult> AddLink(Link link)
+        public async Task<IResult> AddLink(Link link,string createdBy)
         {
-            await _linkDal.AddAsync(link);
+            await _linkDal.AddAsync(link, createdBy);
             return new SuccessResult();
 
         }
@@ -41,9 +41,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Link>(await _linkDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task<IResult> UpdateLink(Link link)
+        public async Task<IResult> UpdateLink(Link link ,string updatedBy)
         {
-            await _linkDal.UpdateAsync(link);
+            await _linkDal.UpdateAsync(link, updatedBy);
             return new SuccessResult();
         }
     }

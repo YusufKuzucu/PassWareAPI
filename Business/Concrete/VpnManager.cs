@@ -17,9 +17,9 @@ namespace Business.Concrete
         {
             _vpnDal = vpnDal;
         }
-        public async Task<IResult> AddVpn(Vpn vpn)
+        public async Task<IResult> AddVpn(Vpn vpn,string createdBy)
         {
-           await _vpnDal.AddAsync(vpn);
+           await _vpnDal.AddAsync(vpn, createdBy);
             return new SuccessResult();
 
         }
@@ -41,9 +41,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Vpn>( await _vpnDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task<IResult> UpdateVpn(Vpn vpn)
+        public async Task<IResult> UpdateVpn(Vpn vpn, string updatedBy)
         {
-            await _vpnDal.UpdateAsync(vpn);
+            await _vpnDal.UpdateAsync(vpn, updatedBy);
             return new SuccessResult();
         }
     }

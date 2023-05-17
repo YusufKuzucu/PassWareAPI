@@ -35,9 +35,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostSql(Sql sql)
+        public async Task<IActionResult> PostSql(Sql sql,string createdBy)
         {
-            var result = await _sqlService.AddSql (sql);
+            var result = await _sqlService.AddSql(sql, createdBy);
             if (result.Success)
             {
                 return Ok(result);
@@ -59,9 +59,9 @@ namespace PassWare.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateSql(Sql sql)
+        public async Task<IActionResult> UpdateSql(Sql sql,string updatedBy)
         {
-            var result = await _sqlService.AddSql(sql);
+            var result = await _sqlService.UpdateSql(sql, updatedBy);
             if (result.Success)
             {
                 return Ok(result);

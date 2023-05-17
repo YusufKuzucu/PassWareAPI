@@ -12,10 +12,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfJumpDal : IJumpDal
     {
-        public async Task AddAsync(Jump entity)
+        public async Task AddAsync(Jump entity, string createdBy)
         {
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
+                entity.CreatedBy = createdBy;
+                entity.CreatedDate = DateTime.Now;
                 context.Jumps.Add(entity);
                 await context.SaveChangesAsync();
             }
@@ -52,7 +54,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task UpdateAsync(Jump entity)
+        public async Task UpdateAsync(Jump entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
@@ -63,6 +65,8 @@ namespace DataAccess.Concrete.EntityFramework
                     jump.JumpServerIP = entity.JumpServerIP;
                     jump.JumpServerUserName= entity.JumpServerUserName;
                     jump.JumpServerPassword= entity.JumpServerPassword;
+                    jump.UpdatedBy = updatedBy;
+                    jump.UpdatedDate = DateTime.Now;
                     await context.SaveChangesAsync();
                 }
 

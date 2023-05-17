@@ -17,9 +17,9 @@ namespace Business.Concrete
         {
             _uıDal = uIDal;
         }
-        public async Task<IResult> AddUI(UI uI)
+        public async Task<IResult> AddUI(UI uI,string createdBy)
         {
-            await _uıDal.AddAsync(uI);
+            await _uıDal.AddAsync(uI, createdBy);
             return new SuccessResult();
 
         }
@@ -41,9 +41,9 @@ namespace Business.Concrete
             return new SuccessDataResult<UI>(await _uıDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task<IResult> UpdateUI(UI uI)
+        public async Task<IResult> UpdateUI(UI uI, string updatedBy)
         {
-            await _uıDal.UpdateAsync(uI);
+            await _uıDal.UpdateAsync(uI, updatedBy);
             return new SuccessResult();
         }
     }
