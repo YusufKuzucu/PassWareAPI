@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,29 +17,33 @@ namespace Business.Concrete
         {
             _communicationDal = communicationDal;
         }
-        public async Task AddCommunication(Communication communication)
+        public async Task<IResult> AddCommunication(Communication communication)
         {
             await _communicationDal.AddAsync(communication);
+            return new SuccessResult();
         }
 
-        public async Task DeleteCommunication(int id)
+        public async Task<IResult> DeleteCommunication(int id)
         {
             await _communicationDal.DeleteAsync(id);
+            return new SuccessResult();
         }
 
-        public async Task<List<Communication>> GetAllCommunication()
+        public async Task<IDataResult<List<Communication>>> GetAllCommunication()
         {
-            return await _communicationDal.GetAllAsync();
+            return new SuccessDataResult<List<Communication>>(await _communicationDal.GetAllAsync());
+          
         }
 
-        public async Task<Communication> GetCommunication(int id)
+        public async Task<IDataResult<Communication>> GetCommunication(int id)
         {
-            return await _communicationDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<Communication>(await _communicationDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateCommunication(Communication communication)
+        public async Task<IResult> UpdateCommunication(Communication communication)
         {
             await _communicationDal.UpdateAsync(communication);
+            return new SuccessResult();
         }
     }
 }

@@ -18,42 +18,58 @@ namespace PassWare.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllCompany()
         {
-            var result = _companyService.GetAllCompany();
-            if (result.IsCompleted)
+            var result = await _companyService.GetAllCompany();
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-         
+
         }
         [HttpGet("Get")]
         public async Task<IActionResult> GetCompany(int id)
         {
-            await _companyService.GetCompany(id);
-            return Ok();
+           var result= await _companyService.GetCompany(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpPost("Post")]
         public async Task<IActionResult> PostCompany(Company company)
         {
-            await _companyService.AddCompany(company);
+            var result=await _companyService.AddCompany(company);
+            if (result.Success)
+            {
+                return Ok(result);
 
-            return Ok();
+            }
+            return BadRequest(result);
         }
 
         [HttpDelete("Delete")]
         public async Task<IActionResult> DeleteCompany(int id)
         {
-            await _companyService.DeleteCompany(id);
-
-            return Ok();
+            var result=await _companyService.DeleteCompany(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+            
         }
 
         [HttpPut("Update")]
         public async Task<IActionResult> UpdateCompany(Company company)
         {
-            await _companyService.UpdateCompany(company);
-
-            return Ok();
+            var result=await _companyService.UpdateCompany(company);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+            
         }
 
     }

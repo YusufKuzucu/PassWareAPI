@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -17,29 +18,34 @@ namespace Business.Concrete
         {
             _projectDal = projectDal;
         }
-        public async Task AddProject(Project project)
+        public async Task<IResult> AddProject(Project project)
         {
            await _projectDal.AddAsync(project);
+            return new SuccessResult();
+
         }
 
-        public async Task DeleteProject(int id)
+        public async Task<IResult> DeleteProject(int id)
         {
             await _projectDal.DeleteAsync(id);
+            return new SuccessResult();
+
         }
 
-        public async Task<List<Project>> GetAllProject()
+        public async Task<IDataResult<List<Project>>> GetAllProject()
         {
-            return await _projectDal.GetAllAsync();
+            return new SuccessDataResult<List<Project>>( await _projectDal.GetAllAsync());
         }
 
-        public async Task<Project> GetProject(int id)
+        public async Task<IDataResult<Project>> GetProject(int id)
         {
-            return await _projectDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<Project>(await _projectDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateProject(Project project)
+        public async Task<IResult> UpdateProject(Project project)
         {
            await _projectDal.UpdateAsync(project);
+            return new SuccessResult();
         }
     }
 }

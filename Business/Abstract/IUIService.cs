@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Business.Abstract
 {
     public interface IUIService
     {
-        Task AddUI(UI uI);
-        Task DeleteUI(int id);
-        Task UpdateUI(UI uI);
-        Task<List<UI>> GetAllUI();
-        Task<UI> GetUI(int id);
+        Task<IResult> AddUI(UI uI);
+        Task<IResult> DeleteUI(int id);
+        Task<IResult> UpdateUI(UI uI);
+        Task<IDataResult<List<UI>>> GetAllUI();
+        Task<IDataResult<UI>> GetUI(int id);
 
     }
 }

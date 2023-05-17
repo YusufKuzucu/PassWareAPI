@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,29 +17,34 @@ namespace Business.Concrete
         {
             _vpnDal = vpnDal;
         }
-        public async Task AddVpn(Vpn vpn)
+        public async Task<IResult> AddVpn(Vpn vpn)
         {
            await _vpnDal.AddAsync(vpn);
+            return new SuccessResult();
+
         }
 
-        public async Task DeleteVpn(int id)
+        public async Task<IResult> DeleteVpn(int id)
         {
            await _vpnDal.DeleteAsync(id);
+           return new SuccessResult();
+
         }
 
-        public async Task<List<Vpn>> GetAllVpn()
+        public async Task<IDataResult<List<Vpn>>> GetAllVpn()
         {
-            return await _vpnDal.GetAllAsync();
+            return new SuccessDataResult<List<Vpn>>( await _vpnDal.GetAllAsync());
         }
 
-        public async Task<Vpn> GetVpn(int id)
+        public async Task<IDataResult<Vpn>> GetVpn(int id)
         {
-            return await _vpnDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<Vpn>( await _vpnDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateVpn(Vpn vpn)
+        public async Task<IResult> UpdateVpn(Vpn vpn)
         {
             await _vpnDal.UpdateAsync(vpn);
+            return new SuccessResult();
         }
     }
 }

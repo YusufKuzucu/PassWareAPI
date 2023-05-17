@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Business.Abstract
 {
     public interface IVpnService
     {
-        Task AddVpn(Vpn vpn);
-        Task DeleteVpn(int id);
-        Task UpdateVpn(Vpn vpn);
-        Task<List<Vpn>> GetAllVpn();
-        Task<Vpn> GetVpn(int id);
+        Task<IResult> AddVpn(Vpn vpn); 
+        Task<IResult> DeleteVpn(int id);
+        Task<IResult> UpdateVpn(Vpn vpn);
+        Task<IDataResult<List<Vpn>>> GetAllVpn(); 
+        Task<IDataResult<Vpn>> GetVpn(int id);
     }
 }

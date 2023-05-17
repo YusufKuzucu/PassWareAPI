@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,29 +17,34 @@ namespace Business.Concrete
         {
             _linkDal = linkDal;
         }
-        public async Task AddLink(Link link)
+        public async Task<IResult> AddLink(Link link)
         {
             await _linkDal.AddAsync(link);
+            return new SuccessResult();
+
         }
 
-        public async Task DeleteLink(int id)
+        public async Task<IResult> DeleteLink(int id)
         {
            await _linkDal.DeleteAsync(id);
+            return new SuccessResult();
+
         }
 
-        public async Task<List<Link>> GetAllLink()
+        public async Task<IDataResult<List<Link>>> GetAllLink()
         {
-            return await _linkDal.GetAllAsync();
+            return new SuccessDataResult<List<Link>>( await _linkDal.GetAllAsync());
         }
 
-        public async Task<Link> GetLink(int id)
+        public async Task<IDataResult<Link>> GetLink(int id)
         {
-            return await _linkDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<Link>(await _linkDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateLink(Link link)
+        public async Task<IResult> UpdateLink(Link link)
         {
             await _linkDal.UpdateAsync(link);
+            return new SuccessResult();
         }
     }
 }

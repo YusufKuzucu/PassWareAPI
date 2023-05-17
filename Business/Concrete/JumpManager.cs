@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,29 +17,34 @@ namespace Business.Concrete
         {
             _jumpDal = jumpDal;
         }
-        public async Task AddJump(Jump jump)
+        public async Task<IResult> AddJump(Jump jump)
         {
             await _jumpDal.AddAsync(jump);
+            return new SuccessResult();
+
         }
 
-        public async Task DeleteJump(int id)
+        public async Task<IResult> DeleteJump(int id)
         {
             await _jumpDal.DeleteAsync(id);
+            return new SuccessResult();
+
         }
 
-        public async Task<List<Jump>> GetAllJump()
+        public async Task<IDataResult<List<Jump>>> GetAllJump()
         {
-            return await _jumpDal.GetAllAsync();
+            return new SuccessDataResult<List<Jump>>( await _jumpDal.GetAllAsync());
         }
 
-        public async Task<Jump> GetJump(int id)
+        public async Task<IDataResult<Jump>> GetJump(int id)
         {
-            return await _jumpDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<Jump>(await _jumpDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateJump(Jump jump)
+        public async Task<IResult> UpdateJump(Jump jump)
         {
             await _jumpDal.UpdateAsync(jump);
+            return new SuccessResult();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,29 +17,32 @@ namespace Business.Concrete
         {
             _sqlDal = sqlDal;
         }
-        public async Task AddSql(Sql sql)
+        public async Task<IResult> AddSql(Sql sql)
         {
             await _sqlDal.AddAsync(sql);
+            return new SuccessResult();
         }
 
-        public async Task DeleteSql(int id)
+        public async Task<IResult> DeleteSql(int id)
         {
             await _sqlDal.DeleteAsync(id);
+            return new SuccessResult();
         }
 
-        public async Task<List<Sql>> GetAllSql()
+        public async Task<IDataResult<List<Sql>>> GetAllSql()
         {
-            return await _sqlDal.GetAllAsync();
+            return new SuccessDataResult<List<Sql>>( await _sqlDal.GetAllAsync());
         }
 
-        public async Task<Sql> GetSql(int id)
+        public async Task<IDataResult<Sql>> GetSql(int id)
         {
-            return await _sqlDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<Sql>(await _sqlDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateSql(Sql sql)
+        public async Task<IResult> UpdateSql(Sql sql)
         {
             await _sqlDal.UpdateAsync(sql);
+            return new SuccessResult();
         }
     }
 }

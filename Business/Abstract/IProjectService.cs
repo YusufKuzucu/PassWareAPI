@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Business.Abstract
 {
     public interface IProjectService
     {
-        Task AddProject(Project project);
-        Task DeleteProject(int id);
-        Task UpdateProject(Project project);
-        Task<List<Project>> GetAllProject();
-        Task<Project> GetProject(int id);
+        Task<IResult> AddProject(Project project);
+        Task<IResult> DeleteProject(int id); 
+        Task<IResult> UpdateProject(Project project);
+        Task<IDataResult<List<Project>>> GetAllProject(); 
+        Task<IDataResult<Project>> GetProject(int id);
     }
 }

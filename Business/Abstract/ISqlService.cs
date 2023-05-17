@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Business.Abstract
 {
     public interface ISqlService
     {
-        Task AddSql(Sql sql);
-        Task DeleteSql(int id);
-        Task UpdateSql(Sql sql);
-        Task<List<Sql>> GetAllSql();
-        Task<Sql> GetSql(int id);
+        Task<IResult> AddSql(Sql sql);
+        Task<IResult> DeleteSql(int id); 
+        Task<IResult> UpdateSql(Sql sql);
+        Task<IDataResult<List<Sql>>> GetAllSql(); 
+        Task<IDataResult<Sql>> GetSql(int id);
     }
 }

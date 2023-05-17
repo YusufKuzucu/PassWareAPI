@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,29 +17,34 @@ namespace Business.Concrete
         {
             _uıDal = uIDal;
         }
-        public async Task AddUI(UI uI)
+        public async Task<IResult> AddUI(UI uI)
         {
             await _uıDal.AddAsync(uI);
+            return new SuccessResult();
+
         }
 
-        public async Task DeleteUI(int id)
+        public async Task<IResult> DeleteUI(int id)
         {
             await _uıDal.DeleteAsync(id);
+            return new SuccessResult();
+
         }
 
-        public async Task<List<UI>> GetAllUI()
+        public async Task<IDataResult<List<UI>>> GetAllUI()
         {
-            return await _uıDal.GetAllAsync();
+            return new SuccessDataResult<List<UI>>( await _uıDal.GetAllAsync());
         }
 
-        public async Task<UI> GetUI(int id)
+        public async Task<IDataResult<UI>> GetUI(int id)
         {
-            return await _uıDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<UI>(await _uıDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateUI(UI uI)
+        public async Task<IResult> UpdateUI(UI uI)
         {
             await _uıDal.UpdateAsync(uI);
+            return new SuccessResult();
         }
     }
 }

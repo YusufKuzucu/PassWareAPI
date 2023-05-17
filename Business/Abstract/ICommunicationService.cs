@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Business.Abstract
 {
     public interface ICommunicationService
     {
-        Task AddCommunication(Communication communication);
-        Task DeleteCommunication(int id);
-        Task UpdateCommunication(Communication communication);
-        Task<List<Communication>> GetAllCommunication();
-        Task<Communication> GetCommunication(int id);
+        Task<IResult> AddCommunication(Communication communication);
+        Task<IResult> DeleteCommunication(int id);
+        Task<IResult> UpdateCommunication(Communication communication);
+        Task<IDataResult<List<Communication>>> GetAllCommunication();
+        Task<IDataResult<Communication>> GetCommunication(int id);
     }
 }

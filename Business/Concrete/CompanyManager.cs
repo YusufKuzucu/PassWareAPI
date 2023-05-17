@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,29 +17,34 @@ namespace Business.Concrete
         {
             _companyDal = companyDal;
         }
-        public async Task AddCompany(Company company)
+        public async Task<IResult> AddCompany(Company company)
         {
             await _companyDal.AddAsync(company);
+            return new SuccessResult();
+
         }
 
-        public async Task DeleteCompany(int id)
+        public async Task<IResult> DeleteCompany(int id)
         {
             await _companyDal.DeleteAsync(id);
+            return new SuccessResult();
+
         }
 
-        public async Task<List<Company>> GetAllCompany()
+        public async Task<IDataResult<List<Company>>> GetAllCompany()
         {
-           return await _companyDal.GetAllAsync();
+           return new SuccessDataResult<List<Company>>(await _companyDal.GetAllAsync());
         }
 
-        public async Task<Company> GetCompany(int id)
+        public async Task<IDataResult<Company>> GetCompany(int id)
         {
-            return await _companyDal.GetAsync(p=>p.Id==id);
+            return new SuccessDataResult<Company>( await _companyDal.GetAsync(p=>p.Id==id));
         }
 
-        public async Task UpdateCompany(Company company)
+        public async Task<IResult> UpdateCompany(Company company)
         {
             await _companyDal.UpdateAsync(company);
+            return new SuccessResult();
         }
     }
 }

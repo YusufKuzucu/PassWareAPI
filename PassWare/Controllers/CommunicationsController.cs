@@ -17,33 +17,53 @@ namespace PassWare.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllCommunication()
         {
-            await _communicationService.GetAllCommunication();
-            return Ok();
+            var result = await _communicationService.GetAllCommunication();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpGet("Get")]
         public async Task<IActionResult> GetCommunication(int id)
         {
-            await _communicationService.GetCommunication(id);
-            return Ok();
+            var result = await _communicationService.GetCommunication(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpPost("Post")]
         public async Task<IActionResult> PostCommunication(Communication communication)
         {
-            await _communicationService.AddCommunication(communication);
-            return Ok();
+            var result = await _communicationService.AddCommunication(communication);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpPut("Update")]
         public async Task<IActionResult> PutCommunication(Communication communication)
         {
-            await _communicationService.UpdateCommunication(communication);
-            return Ok();
+            var result = await _communicationService.UpdateCommunication(communication);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
 
         }
         [HttpDelete("Delete")]
         public async Task<IActionResult> DeleteCommunication(int id)
         {
-            await _communicationService.DeleteCommunication(id);
-            return Ok();
+            var result = await _communicationService.DeleteCommunication(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

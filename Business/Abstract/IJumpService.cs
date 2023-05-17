@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Business.Abstract
 {
     public interface IJumpService
     {
-        Task AddJump(Jump jump);
-        Task DeleteJump(int id);
-        Task UpdateJump(Jump jump);
-        Task<List<Jump>> GetAllJump();
-        Task<Jump> GetJump(int id);
+        Task<IResult> AddJump(Jump jump);
+        Task<IResult> DeleteJump(int id);
+        Task<IResult> UpdateJump(Jump jump);
+        Task<IDataResult<List<Jump>>> GetAllJump();
+        Task<IDataResult<Jump>> GetJump(int id);
 
     }
 }
