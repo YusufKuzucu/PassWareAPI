@@ -18,6 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
+                
                 context.Companys.Add(entity);
                 await context.SaveChangesAsync();
             }
