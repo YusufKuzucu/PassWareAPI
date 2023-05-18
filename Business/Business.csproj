@@ -10,6 +10,7 @@
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,8 +21,6 @@
   <ItemGroup>
     <Folder Include="BusinessAspects\Autofac\" />
     <Folder Include="CCS\" />
-    <Folder Include="Constans\" />
-    <Folder Include="ValidationRules\FluentValidation\" />
   </ItemGroup>
 
 </Project>

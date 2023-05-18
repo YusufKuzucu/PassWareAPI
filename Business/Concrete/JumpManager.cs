@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +20,7 @@ namespace Business.Concrete
         {
             _jumpDal = jumpDal;
         }
+        [ValidationAspect(typeof(JumpValidator))]
         public async Task<IResult> AddJump(Jump jump, string createdBy)
         {
             await _jumpDal.AddAsync(jump, createdBy);

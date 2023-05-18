@@ -3,23 +3,21 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aspects\Autofac\Validation\" />
-    <Folder Include="CrossCuttingConcerns\Validation\" />
     <Folder Include="DependencyResolvers\" />
     <Folder Include="Entities\Concrete\" />
     <Folder Include="Extensions\" />
     <Folder Include="Utilities\Business\" />
-    <Folder Include="Utilities\Interceptors\" />
     <Folder Include="Utilities\IoC\" />
     <Folder Include="Utilities\Security\Encryption\" />
     <Folder Include="Utilities\Security\Hashing\" />
