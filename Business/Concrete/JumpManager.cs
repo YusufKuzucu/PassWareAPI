@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.CCS;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
@@ -11,20 +12,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Business.Concrete
 {
     public class JumpManager : IJumpService
     {
         IJumpDal _jumpDal;
+        //ILogger _logger;
+      
+  
+    
         public JumpManager(IJumpDal jumpDal)
         {
             _jumpDal = jumpDal;
+            //_logger = logger;
+
         }
         [ValidationAspect(typeof(JumpValidator))]
         public async Task<IResult> AddJump(Jump jump, string createdBy)
         {
+            //_logger.Log();
+          
             await _jumpDal.AddAsync(jump, createdBy);
             return new SuccessResult();
+            
 
         }
 

@@ -15,9 +15,7 @@
 
   <ItemGroup>
     <Folder Include="DependencyResolvers\" />
-    <Folder Include="Entities\Concrete\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Utilities\Business\" />
     <Folder Include="Utilities\IoC\" />
     <Folder Include="Utilities\Security\Encryption\" />
     <Folder Include="Utilities\Security\Hashing\" />
