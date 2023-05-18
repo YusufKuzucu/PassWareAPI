@@ -21,7 +21,14 @@ namespace Core.Utilities.Security.JWT
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            //_tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            _tokenOptions = new()
+            {
+                Audience = Configuration["TokenOptions:Audience"],
+                AccessTokenExpiration = Convert.ToInt32(Configuration["TokenOptions:AccessTokenExpiration"]),
+                Issuer = Configuration["TokenOptions:Issuer"],
+                SecurityKey = Configuration["TokenOptions:SecurityKey"],
+            };
 
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
