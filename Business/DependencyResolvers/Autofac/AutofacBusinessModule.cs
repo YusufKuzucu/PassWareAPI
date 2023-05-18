@@ -5,6 +5,7 @@ using Business.CCS;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using System;
@@ -46,11 +47,12 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<FileLogger>().As<ILogger>().SingleInstance();
             builder.RegisterType<DatabaseLogger>().As<ILogger>().SingleInstance();
-            //builder.RegisterType<UserManager>().As<IUserService>().SingleInstance(); ;
-            //builder.RegisterType<UserDal>().As<IUserDal>().SingleInstance(); ;
 
-            //builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance(); ;
-            //builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
+            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance(); ;
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance(); ;
+
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance(); ;
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

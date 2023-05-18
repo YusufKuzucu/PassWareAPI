@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.CCS;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -29,6 +30,7 @@ namespace Business.Concrete
 
         }
         [ValidationAspect(typeof(JumpValidator))]
+        [SecuredOperation("admin")]
         public async Task<IResult> AddJump(Jump jump, string createdBy)
         {
             //_logger.Log();
