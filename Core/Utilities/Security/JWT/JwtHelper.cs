@@ -18,10 +18,11 @@ namespace Core.Utilities.Security.JWT
         public IConfiguration Configuration { get; }
         private TokenOptions _tokenOptions;
         private DateTime _accessTokenExpiration;
+
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            //_tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
             _tokenOptions = new()
             {
                 Audience = Configuration["TokenOptions:Audience"],
@@ -30,13 +31,19 @@ namespace Core.Utilities.Security.JWT
                 SecurityKey = Configuration["TokenOptions:SecurityKey"],
             };
 
+
+            //var section = Configuration.GetSection("TokenOptions");
+            // _tokenOptions = Newtonsoft.Json.JsonConvert.DeserializeObject<TokenOptions>(Configuration["TokenOptions"]));
+
+            //_tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
         }
+
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
-            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
-            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
+            var signingCredentails = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
+            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentails, operationClaims);
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);
 
@@ -48,8 +55,7 @@ namespace Core.Utilities.Security.JWT
 
         }
 
-        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
-            SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
+        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
             var jwt = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer,
@@ -58,7 +64,7 @@ namespace Core.Utilities.Security.JWT
                 notBefore: DateTime.Now,
                 claims: SetClaims(user, operationClaims),
                 signingCredentials: signingCredentials
-            );
+                );
             return jwt;
         }
 

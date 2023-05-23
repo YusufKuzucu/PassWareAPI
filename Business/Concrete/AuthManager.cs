@@ -71,5 +71,16 @@ namespace Business.Concrete
             var accessToken = _tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, "Token oluşturuldu");
         }
+
+        //public IDataResult<User> ForgotMyPassword(string email)
+        //{
+        //    var user =  _userService.GetByMailAsync(email);
+
+        //}
+
+        //public IDataResult<User> ResetPassword(ResetPassword resetPassword)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

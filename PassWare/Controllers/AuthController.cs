@@ -10,10 +10,12 @@ namespace PassWare.Controllers
     public class AuthController : Controller
     {
         private IAuthService _authService;
+        private ILogger<AuthController> _logger;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, ILogger<AuthController> logger)
         {
             _authService = authService;
+            _logger = logger;
         }
 
         [HttpPost("login")]
@@ -28,9 +30,11 @@ namespace PassWare.Controllers
             var result = _authService.CreateAccessToken(userToLogin.Data);
             if (result.Success)
             {
+                _logger.LogInformation("Login process OK. Data : {@resData}", result.Data);
                 return Ok(result.Data);
             }
 
+            _logger.LogError($"Login process NOT OK. Data : {result.Message}");
             return BadRequest(result.Message);
         }
 
@@ -47,10 +51,18 @@ namespace PassWare.Controllers
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
+                _logger.LogInformation("Register process Ok. Data :{@resData} ",result.Data);
                 return Ok(result.Data);
             }
-
+            _logger.LogError($"Register process NOT OK. Data : {result.Message}");
             return BadRequest(result.Message);
         }
+        //[HttpPost("forgotmypassword")]
+        //public async ActionResult ForgotMyPassword(string email)
+        //{
+        //    return null;
+        //}
+
+        //[HttpPost("resetpassword")]
     }
 }
