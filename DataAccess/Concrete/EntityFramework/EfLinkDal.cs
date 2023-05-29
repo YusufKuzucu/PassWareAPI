@@ -51,7 +51,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
-                return await context.Set<Link>().FirstOrDefaultAsync(filter);
+                return await context.Set<Link>().SingleOrDefaultAsync(filter);
             }
         }
 

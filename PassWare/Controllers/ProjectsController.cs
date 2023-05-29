@@ -84,5 +84,19 @@ namespace PassWare.Controllers
             return BadRequest(result);
 
         }
+        [HttpDelete("ProjectAllDelete")]
+        public async Task<IActionResult> ProjectAllDataDelete(int id)
+        {
+            var deleteProject = await _projectService.GetProject(id);
+            var result = await _projectService.ProjectAllDataDelete(id);
+            if (result.Success)
+            {
+                _logger.LogInformation("all data of the project has been deleted. Data : {@deleteproject}", deleteProject.Data);
+                return Ok(result);
+            }
+            _logger.LogError($"all data of the project has been deletedfailed. Erorr : {result.Message}");
+            return BadRequest(result);
+
+        }
     }
 }

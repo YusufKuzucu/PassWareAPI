@@ -19,26 +19,18 @@ namespace Business.Concrete
     public class JumpManager : IJumpService
     {
         IJumpDal _jumpDal;
-        //ILogger _logger;
-      
-  
-    
         public JumpManager(IJumpDal jumpDal)
         {
             _jumpDal = jumpDal;
-            //_logger = logger;
+         
 
         }
         [ValidationAspect(typeof(JumpValidator))]
         [SecuredOperation("admin")]
         public async Task<IResult> AddJump(Jump jump, string createdBy)
         {
-            //_logger.Log();
-          
             await _jumpDal.AddAsync(jump, createdBy);
             return new SuccessResult();
-            
-
         }
 
         public async Task<IResult> DeleteJump(int id)

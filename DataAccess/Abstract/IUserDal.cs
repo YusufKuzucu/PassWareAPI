@@ -1,4 +1,6 @@
 ﻿using Core.Entities.Concrete;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,6 @@ namespace DataAccess.Abstract
         void Delete(int id);
         void Update(User entity);
         List<OperationClaim> GetClaims(User user);
+        List<UserDto> GetUsersDtos(Expression<Func<UserDto, bool>> filter = null);
     }
 }

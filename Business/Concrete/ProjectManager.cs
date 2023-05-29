@@ -20,18 +20,15 @@ namespace Business.Concrete
         }
         public async Task<IResult> AddProject(Project project,string createdBy)
         {
-           await _projectDal.AddAsync(project, createdBy);
+            await _projectDal.AddAsync(project, createdBy);
             return new SuccessResult();
-
         }
 
         public async Task<IResult> DeleteProject(int id)
         {
             await _projectDal.DeleteAsync(id);
             return new SuccessResult();
-
         }
-
         public async Task<IDataResult<List<Project>>> GetAllProject()
         {
             return new SuccessDataResult<List<Project>>( await _projectDal.GetAllAsync());
@@ -42,9 +39,15 @@ namespace Business.Concrete
             return new SuccessDataResult<Project>(await _projectDal.GetAsync(p=>p.Id==id));
         }
 
+        public async Task<IResult> ProjectAllDataDelete(int id)
+        {
+            await _projectDal.ProjectAllDelete(id);
+            return new SuccessResult();
+        }
+
         public async Task<IResult> UpdateProject(Project project, string updatedBy)
         {
-           await _projectDal.UpdateAsync(project, updatedBy);
+            await _projectDal.UpdateAsync(project, updatedBy);
             return new SuccessResult();
         }
     }

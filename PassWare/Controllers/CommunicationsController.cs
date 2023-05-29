@@ -59,7 +59,7 @@ namespace PassWare.Controllers
             var UpdateCommunication = await _communicationService.GetCommunication(communication.Id);
             if (result.Success)
             {
-                _logger.LogInformation("Communication successfully updated. Data: {@updatecommn}", UpdateCommunication.Data);
+                _logger.LogInformation("Communication successfully updated. Data: {@updatecommun}", UpdateCommunication.Data);
                 return Ok(result);
             }
             _logger.LogError($"Communication updateing failed. Hata: {result.Message}");

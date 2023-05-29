@@ -7,7 +7,7 @@ namespace PassWare.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : Controller
+    public class AuthController : ControllerBase
     {
         private IAuthService _authService;
         private ILogger<AuthController> _logger;
@@ -39,7 +39,7 @@ namespace PassWare.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult Register(UserForRegisterDto userForRegisterDto)
+        public ActionResult Register([FromBody]UserForRegisterDto userForRegisterDto)
         {
             var userExists = _authService.UserExists(userForRegisterDto.Email);
             if (!userExists.Success)
@@ -51,18 +51,33 @@ namespace PassWare.Controllers
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
-                _logger.LogInformation("Register process Ok. Data :{@resData} ",result.Data);
+                _logger.LogInformation("Register process Ok. Data :{@resData} ", result.Data);
                 return Ok(result.Data);
             }
             _logger.LogError($"Register process NOT OK. Data : {result.Message}");
             return BadRequest(result.Message);
         }
-        //[HttpPost("forgotmypassword")]
-        //public async ActionResult ForgotMyPassword(string email)
-        //{
-        //    return null;
-        //}
+        [HttpPost("forgotmypassword")]
+        public ActionResult ForgotMyPassword(string email)
+        {
+            var result = _authService.ForgotMyPassword(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
 
-        //[HttpPost("resetpassword")]
+        }
+        [HttpPost("ResetPassword")]
+        public ActionResult ResetPassword(ResetPassword resetPassword)
+        {
+            var result = _authService.ResetPassword(resetPassword);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
+
 }

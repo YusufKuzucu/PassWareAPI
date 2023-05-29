@@ -21,7 +21,6 @@ namespace Business.Concrete
         {
             await _companyDal.AddAsync(company);
             return new SuccessResult();
-
         }
 
         public async Task<IResult> DeleteCompany(int id)

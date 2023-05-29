@@ -1,6 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using DataAccess.Abstract;
-using Microsoft.EntityFrameworkCore;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(User entity)
         {
-            using (PASSWareDbContext context=new PASSWareDbContext())
+            using (PASSWareDbContext context = new PASSWareDbContext())
             {
                 context.Users.Add(entity);
                 context.SaveChanges();
@@ -34,11 +34,11 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public  List<User> GetAll(Expression<Func<User, bool>> filter = null)
+        public List<User> GetAll(Expression<Func<User, bool>> filter = null)
         {
-            using (PASSWareDbContext context=new PASSWareDbContext())
+            using (PASSWareDbContext context = new PASSWareDbContext())
             {
-                return filter==null
+                return filter == null
                     ? context.Set<User>().ToList()
                     : context.Set<User>().Where(filter).ToList();
             }
@@ -68,21 +68,44 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(User entity)
         {
-            using (PASSWareDbContext context = new PASSWareDbContext())
+            using (var context = new PASSWareDbContext())
             {
-                var user=context.Users.Find(entity.Id);
-                if (user!=null)
+                var user = context.Users.Find(entity.Id);
+                if (user != null)
                 {
                     user.FirstName = entity.FirstName;
                     user.LastName = entity.LastName;
+
                     user.PasswordHash = entity.PasswordHash;
-                    user.Email = entity.Email;  
+                    user.Email = entity.Email;
                     user.PasswordSalt = entity.PasswordSalt;
                     user.Status = entity.Status;
+                    user.VerificationNumber = entity.VerificationNumber;
                     context.SaveChanges();
 
                 }
             }
         }
+
+        public List<UserDto> GetUsersDtos(Expression<Func<UserDto, bool>> filter = null)
+        {
+            using (var context = new PASSWareDbContext())
+            {
+                var result = from user in context.Users
+                             select new UserDto
+                             {
+                                 Id = user.Id,
+                                 Email = user.Email,
+                                 FirstName = user.FirstName,
+                                 LastName = user.LastName
+
+
+                             };
+                return filter == null
+                    ? result.ToList()
+                    : result.Where(filter).ToList();
+            }
+        }
     }
+
 }

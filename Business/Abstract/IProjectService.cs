@@ -11,7 +11,8 @@ namespace Business.Abstract
     public interface IProjectService
     {
         Task<IResult> AddProject(Project project,string createdBy);
-        Task<IResult> DeleteProject(int id); 
+        Task<IResult> DeleteProject(int id);
+        Task<IResult> ProjectAllDataDelete(int id);
         Task<IResult> UpdateProject(Project project,string updatedBy);
         Task<IDataResult<List<Project>>> GetAllProject(); 
         Task<IDataResult<Project>> GetProject(int id);
