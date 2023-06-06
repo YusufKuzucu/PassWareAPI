@@ -30,6 +30,16 @@ namespace PassWare.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("GetBySql")]
+        public async Task<IActionResult> GetAllSql(int id)
+        {
+            var result = await _sqlService.GetBySql(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("Get")]
         public async Task<IActionResult> GetSql(int id)
         {

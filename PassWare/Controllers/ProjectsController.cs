@@ -30,6 +30,26 @@ namespace PassWare.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("GetByProject")]
+        public async Task<IActionResult> GetByProject(int id)
+        {
+            var result = await _projectService.GetByProject(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("GetByProjectName")]
+        public async Task<IActionResult> GetByProjectName(string name)
+        {
+            var result = await _projectService.GetByProjectName(name);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("Get")]
         public async Task<IActionResult> GetProject(int id)
         {

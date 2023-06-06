@@ -35,6 +35,11 @@ namespace Business.Concrete
           
         }
 
+        public async Task<IDataResult<List<Communication>>> GetByCommunication(int id)
+        {
+            return new SuccessDataResult<List<Communication>>(await _communicationDal.GetAllAsync(x=>x.ProjectId==id)) ;
+        }
+
         public async Task<IDataResult<Communication>> GetCommunication(int id)
         {
             return new SuccessDataResult<Communication>(await _communicationDal.GetAsync(p=>p.Id==id));

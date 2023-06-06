@@ -16,5 +16,7 @@ namespace Business.Abstract
         Task<IResult> UpdateProject(Project project,string updatedBy);
         Task<IDataResult<List<Project>>> GetAllProject(); 
         Task<IDataResult<Project>> GetProject(int id);
+        Task<IDataResult<List<Project>>> GetByProject(int id);
+        Task<IDataResult<List<Project>>> GetByProjectName(string name);
     }
 }

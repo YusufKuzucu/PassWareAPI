@@ -15,5 +15,7 @@ namespace Business.Abstract
         Task<IResult> UpdateSql(Sql sql, string updatedBy);
         Task<IDataResult<List<Sql>>> GetAllSql(); 
         Task<IDataResult<Sql>> GetSql(int id);
+        Task<IDataResult<List<Sql>>> GetBySql(int id);
+
     }
 }

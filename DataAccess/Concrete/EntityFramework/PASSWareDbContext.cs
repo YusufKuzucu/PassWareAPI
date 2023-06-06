@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Vpn> Vpns { get; set; }
         public DbSet<UI> UIs { get; set; }
         public DbSet<Communication> Communications { get; set; }
-        public DbSet<Link> Links { get; set; }
+        public DbSet<Files> Links { get; set; }
 
 
 

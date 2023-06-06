@@ -36,6 +36,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<UI>>( await _uıDal.GetAllAsync());
         }
 
+        public async Task<IDataResult<List<UI>>> GetByUI(int id)
+        {
+            return new SuccessDataResult<List<UI>>(await _uıDal.GetAllAsync(x=>x.ProjectId==id)) ;
+        }
+
         public async Task<IDataResult<UI>> GetUI(int id)
         {
             return new SuccessDataResult<UI>(await _uıDal.GetAsync(p=>p.Id==id));

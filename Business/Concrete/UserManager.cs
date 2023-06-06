@@ -88,9 +88,9 @@ namespace Business.Concrete
 
 
 
-        public IDataResult<UserDto> GetUserDtoById(int userId)
+        public IDataResult<UserDto> GetUserDtoById(int id)
         {
-            return new SuccessDataResult<UserDto>(_userDal.GetUsersDtos(u => u.Id == userId).SingleOrDefault(), Messages.UserIsListed);
+            return new SuccessDataResult<UserDto>(_userDal.GetUsersDtos(u => u.Id == id).SingleOrDefault(), Messages.UserIsListed);
         }
 
         public IDataResult<UserDto> GetUserDtoByMail(string email)
@@ -168,6 +168,16 @@ namespace Business.Concrete
         private bool BaseCheckIfEmailExist(string userEmail)
         {
             return _userDal.GetAll(u => u.Email == userEmail).Any();
+        }
+
+        public IDataResult<User> GetUserByIdEmail(string email)
+        {
+            var user = _userDal.Get(x => x.Email == email);
+            if (user != null)
+            {
+                return new SuccessDataResult<User>(user, Messages.UserIsListed);
+            }
+            return new ErrorDataResult<User>(Messages.UserIsNotExists);
         }
     }
 

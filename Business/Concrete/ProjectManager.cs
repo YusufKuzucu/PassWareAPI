@@ -1,7 +1,10 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +37,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Project>>( await _projectDal.GetAllAsync());
         }
 
+        public async Task<IDataResult<List<Project>>> GetByProject(int id)
+        {
+            return new SuccessDataResult<List<Project>>(await _projectDal.GetAllAsync(x=>x.CompanyId==id)) ;
+        }
+
+        public async Task<IDataResult<List<Project>>> GetByProjectName(string name)
+        {
+            return new SuccessDataResult<List<Project>>(await _projectDal.GetAllAsync(x=>x.ProjectName==name));
+        }
+
         public async Task<IDataResult<Project>> GetProject(int id)
         {
             return new SuccessDataResult<Project>(await _projectDal.GetAsync(p=>p.Id==id));
@@ -50,5 +63,10 @@ namespace Business.Concrete
             await _projectDal.UpdateAsync(project, updatedBy);
             return new SuccessResult();
         }
+
+
+
+
+
     }
 }

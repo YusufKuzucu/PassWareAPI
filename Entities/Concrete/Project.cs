@@ -22,7 +22,7 @@ namespace Entities.Concrete
         public ICollection<Communication>? Communications { get; set; } = new List<Communication>();
         public ICollection<UI>? UIs { get; set; } = new List<UI>();
         public ICollection<Vpn>? Vpns { get; set; } = new List<Vpn>();
-        public ICollection<Link>? Links { get; set; } = new List<Link>();
+        public ICollection<Files>? Files { get; set; } = new List<Files>();
         public string? CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string? UpdatedBy { get; set; }

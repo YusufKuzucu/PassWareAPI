@@ -5,6 +5,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,6 @@ namespace Business.Concrete
          
 
         }
-        [ValidationAspect(typeof(JumpValidator))]
-        [SecuredOperation("admin")]
         public async Task<IResult> AddJump(Jump jump, string createdBy)
         {
             await _jumpDal.AddAsync(jump, createdBy);
@@ -43,6 +42,11 @@ namespace Business.Concrete
         public async Task<IDataResult<List<Jump>>> GetAllJump()
         {
             return new SuccessDataResult<List<Jump>>( await _jumpDal.GetAllAsync());
+        }
+
+        public async Task<IDataResult<List<Jump>>> GetByJump(int id)
+        {
+            return new SuccessDataResult<List<Jump>>( await _jumpDal.GetAllAsync(x => x.ProjectId == id));
         }
 
         public async Task<IDataResult<Jump>> GetJump(int id)

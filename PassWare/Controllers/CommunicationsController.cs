@@ -30,6 +30,16 @@ namespace PassWare.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("GetByCommunication")]
+        public async Task<IActionResult> GetByCommunication(int id)
+        {
+            var result = await _communicationService.GetByCommunication(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("Get")]
         public async Task<IActionResult> GetCommunication(int id)
         {

@@ -61,7 +61,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (PASSWareDbContext context=new PASSWareDbContext())
             {
                 var project = await context.Projects.Include(p => p.Jumps)
-                    .Include(p => p.Sqls).Include(p => p.Vpns).Include(p => p.UIs).Include(p => p.Communications).Include(p => p.Links)
+                    .Include(p => p.Sqls).Include(p => p.Vpns).Include(p => p.UIs).Include(p => p.Communications).Include(p => p.Files)
                     .SingleOrDefaultAsync(p=>p.Id==id);
                 if (project==null)
                 {
@@ -70,7 +70,7 @@ namespace DataAccess.Concrete.EntityFramework
                 context.Jumps.RemoveRange(project.Jumps);
                 context.Sqls.RemoveRange(project.Sqls);
                 context.UIs.RemoveRange(project.UIs);
-                context.Links.RemoveRange(project.Links);
+                context.Links.RemoveRange(project.Files);
                 context.Vpns.RemoveRange(project.Vpns);
                 context.Communications.RemoveRange(project.Communications);
                 context.Projects.Remove(project);

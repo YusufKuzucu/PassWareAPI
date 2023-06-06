@@ -34,6 +34,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Sql>>( await _sqlDal.GetAllAsync());
         }
 
+        public async Task<IDataResult<List<Sql>>> GetBySql(int id)
+        {
+            return new SuccessDataResult<List<Sql>>(await _sqlDal.GetAllAsync(x=>x.ProjectId==id)); 
+        }
+
         public async Task<IDataResult<Sql>> GetSql(int id)
         {
             return new SuccessDataResult<Sql>(await _sqlDal.GetAsync(p=>p.Id==id));

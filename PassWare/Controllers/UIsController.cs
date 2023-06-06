@@ -31,6 +31,16 @@ namespace PassWare.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("GetByUI")]
+        public async Task<IActionResult> GetByUI(int id)
+        {
+            var result = await _uıService.GetByUI(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("Get")]
         public async Task<IActionResult> GetUI(int id)
         {

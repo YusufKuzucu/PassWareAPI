@@ -15,5 +15,6 @@ namespace Business.Abstract
         Task<IResult> UpdateUI(UI uI, string updatedBy);
         Task<IDataResult<List<UI>>> GetAllUI();
         Task<IDataResult<UI>> GetUI(int id);
+        Task<IDataResult<List<UI>>> GetByUI(int id);
     }
 }

@@ -19,9 +19,11 @@ namespace Business.Abstract
         List<OperationClaim> GetClaims(User user);
         User GetUserByMail(string email);
 
+       IDataResult<User> GetUserByIdEmail(string email);
 
 
-        IDataResult<UserDto> GetUserDtoById(int userId);
+
+        IDataResult<UserDto> GetUserDtoById(int  id);
         IResult UpdateByDto(UserDto userDto);
         IDataResult<List<UserDto>> GetAllDto();
         IDataResult<UserDto> GetUserDtoByMail(string email);

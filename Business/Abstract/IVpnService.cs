@@ -15,5 +15,6 @@ namespace Business.Abstract
         Task<IResult> UpdateVpn(Vpn vpn, string updatedBy);
         Task<IDataResult<List<Vpn>>> GetAllVpn(); 
         Task<IDataResult<Vpn>> GetVpn(int id);
+        Task<IDataResult<List<Vpn>>> GetByVpn(int id);
     }
 }

@@ -14,12 +14,10 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(u => u.Email).NotNull();
             RuleFor(u => u.Email).NotEmpty();
-            RuleFor(u => u.Email).EmailAddress();
 
-            RuleFor(u => u.Password).NotNull();
-            RuleFor(u => u.Password).NotEmpty();
-            RuleFor(u => u.Password).MinimumLength(3);
-            RuleFor(u => u.Password).MaximumLength(25);
+
+            
+          
         }
     }
 }

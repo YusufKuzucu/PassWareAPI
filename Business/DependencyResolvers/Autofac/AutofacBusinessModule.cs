@@ -33,8 +33,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<JumpManager>().As<IJumpService>().SingleInstance();
             builder.RegisterType<EfJumpDal>().As<IJumpDal>().SingleInstance();
 
-            builder.RegisterType<LinkManager>().As<ILinkService>().SingleInstance();
-            builder.RegisterType<EfLinkDal>().As<ILinkDal>().SingleInstance();
+            builder.RegisterType<FilesManager>().As<IFilesService>().SingleInstance();
+            builder.RegisterType<EfFilesDal>().As<IFilesDal>().SingleInstance();
 
             builder.RegisterType<SqlManager>().As<ISqlService>().SingleInstance();
             builder.RegisterType<EfSqlDal>().As<ISqlDal>().SingleInstance();

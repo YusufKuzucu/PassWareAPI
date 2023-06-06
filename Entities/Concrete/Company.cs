@@ -13,9 +13,5 @@ namespace Entities.Concrete
         [Key]
         public int Id { get; set; }
         public string CompanyName { get; set; }
-
-        //public bool? IsDeleted { get; set; }
-        //public DateTime? Deleted { get; set; }
-        //public int? DeletedBy { get; set; }
     }
 }

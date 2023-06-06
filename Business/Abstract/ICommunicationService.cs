@@ -15,5 +15,6 @@ namespace Business.Abstract
         Task<IResult> UpdateCommunication(Communication communication, string updatedBy);
         Task<IDataResult<List<Communication>>> GetAllCommunication();
         Task<IDataResult<Communication>> GetCommunication(int id);
+        Task<IDataResult<List<Communication>>> GetByCommunication(int id);
     }
 }

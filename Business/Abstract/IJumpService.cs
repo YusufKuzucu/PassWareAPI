@@ -15,5 +15,6 @@ namespace Business.Abstract
         Task<IResult> UpdateJump(Jump jump, string updatedBy);
         Task<IDataResult<List<Jump>>> GetAllJump();
         Task<IDataResult<Jump>> GetJump(int id);
+        Task<IDataResult<List<Jump>>> GetByJump(int id);
     }
 }

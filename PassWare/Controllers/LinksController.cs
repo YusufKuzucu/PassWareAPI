@@ -11,19 +11,31 @@ namespace PassWare.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class LinksController : ControllerBase
+    public class FilesController : ControllerBase
     {
-        ILinkService _linkService;
-        ILogger<LinksController> _logger;
-        public LinksController(ILinkService linkService, ILogger<LinksController> logger)
+        IFilesService _filesService;
+        
+       
+        ILogger<FilesController> _logger;
+        public FilesController(IFilesService filesService, ILogger<FilesController> logger)
         {
-            _linkService = linkService;
+            _filesService = filesService;
             _logger = logger;
         }
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAllLink()
+        public async Task<IActionResult> GetAllFiles()
         {
-            var result=await _linkService.GetAllLink();
+            var result = await _filesService.GetAllFiles();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("GetByFile")]
+        public async Task<IActionResult> GetByFiles(int id)
+        {
+            var result = await _filesService.GetByFiles(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -31,9 +43,9 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpGet("Get")]
-        public async Task<IActionResult> GetLink(int id)
+        public async Task<IActionResult> GetFile(int id)
         {
-            var result = await _linkService.GetLink(id);
+            var result = await _filesService.GetFiles(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,45 +53,45 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
         [HttpPost("Post")]
-        public async Task<IActionResult> PostLink(Link link,string createdBy)
+        public async Task<IActionResult> PostFile(Files files, string createdBy)
         {
-            var result = await _linkService.AddLink(link, createdBy);
+            var result = await _filesService.AddFiles(files, createdBy);
             if (result.Success)
             {
-                _logger.LogInformation("Link create process done. Data: {@link}", link);
+                _logger.LogInformation("Files create process done. Data: {@file}", files);
                 return Ok(result);
 
             }
-            _logger.LogError($"Link when creating failed. Error : {result.Message}");
+            _logger.LogError($"Files when creating failed. Error : {result.Message}");
             return BadRequest(result);
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteLink(int id)
+        public async Task<IActionResult> DeleteFile(int id)
         {
-            var deleteLink = await _linkService.GetLink(id);
-            var result = await _linkService.DeleteLink(id);
+            var deleteFile = await _filesService.GetFiles(id);
+            var result = await _filesService.DeleteFiles(id);
             if (result.Success)
             {
-                _logger.LogInformation("Link deleted successfully. Data : {@deletelink}", deleteLink.Data);
+                _logger.LogInformation("File deleted successfully. Data : {@deletefile}", deleteFile.Data);
                 return Ok(result);
             }
-            _logger.LogError($"Link deleting failed. Erorr : {result.Message}");
+            _logger.LogError($"File deleting failed. Erorr : {result.Message}");
             return BadRequest(result);
 
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateLink(Link link,string updatedBy)
+        public async Task<IActionResult> UpdateLink(Files files, string updatedBy)
         {
-            var result = await _linkService.UpdateLink(link, updatedBy);
-            var updateLink = await _linkService.GetLink(link.Id);
+            var result = await _filesService.UpdateFiles(files, updatedBy);
+            var updateFile = await _filesService.GetFiles(files.Id);
             if (result.Success)
             {
-                _logger.LogInformation("Link successfully updated. Data: {@updatelink}",updateLink.Data);
+                _logger.LogInformation("File successfully updated. Data: {@updatelink}", updateFile.Data);
                 return Ok(result);
             }
-            _logger.LogError($"Link updateing failed. Hata: {result.Message}");
+            _logger.LogError($"File updateing failed. Hata: {result.Message}");
             return BadRequest(result);
 
         }

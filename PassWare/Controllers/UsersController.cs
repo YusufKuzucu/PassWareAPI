@@ -41,13 +41,29 @@ namespace PassWare.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbyidemail")]
+        public IActionResult GetByIdEmail(string email)
+        {
+            var result = _userService.GetUserByIdEmail(email);
+            if (result.Success)
+            {
+                var userDto = result.Data; 
+
+                
+                return Ok(userDto);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
             var result = _userService.GetUserDtoById(id);
             if (result.Success)
             {
-                return Ok(result);
+                var userDto = result.Data;
+
+
+                return Ok(userDto);
             }
             return BadRequest(result);
         }

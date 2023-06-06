@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfLinkDal : ILinkDal
+    public class EfFilesDal : IFilesDal
     {
-        public async Task AddAsync(Link entity, string ceratedBy)
+        public async Task AddAsync(Files entity, string createdBy)
         {
-            using (PASSWareDbContext context=new PASSWareDbContext())
+            using (PASSWareDbContext context = new PASSWareDbContext())
             {
-                entity.CreatedBy = ceratedBy;
+                entity.CreatedBy = createdBy;
                 entity.CreatedDate = DateTime.Now;
                 context.Links.Add(entity);
-                await context.SaveChangesAsync();  
+                await context.SaveChangesAsync();
             }
         }
 
@@ -27,7 +27,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
-                var link=await context.Links.FindAsync(id);
+                var link = await context.Links.FindAsync(id);
                 if (link != null)
                 {
                     context.Links.Remove(link);
@@ -36,36 +36,36 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public async Task<List<Link>> GetAllAsync(Expression<Func<Link, bool>> filter = null)
+        public async Task<List<Files>> GetAllAsync(Expression<Func<Files, bool>> filter = null)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
 
                 return filter == null
-                    ? await context.Set<Link>().ToListAsync()
-                    : await context.Set<Link>().Where(filter).ToListAsync();
+                    ? await context.Set<Files>().ToListAsync()
+                    : await context.Set<Files>().Where(filter).ToListAsync();
             }
         }
 
-        public async Task<Link> GetAsync(Expression<Func<Link, bool>> filter)
+        public async Task<Files> GetAsync(Expression<Func<Files, bool>> filter)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
-                return await context.Set<Link>().SingleOrDefaultAsync(filter);
+                return await context.Set<Files>().SingleOrDefaultAsync(filter);
             }
         }
 
-        public async Task UpdateAsync(Link entity, string updatedBy)
+        public async Task UpdateAsync(Files entity, string updatedBy)
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
-                var link = await context.Links.FindAsync(entity.Id);
-                if (link!=null)
+                var file = await context.Links.FindAsync(entity.Id);
+                if (file != null)
                 {
-                    link.ConnectExplanation = entity.ConnectExplanation;
-                    link.ConnectionInfo = entity.ConnectionInfo;
-                    link.UpdatedBy = updatedBy;
-                    link.UpdatedDate = DateTime.Now;
+                    file.ConnectExplanation = entity.ConnectExplanation;
+                    file.ConnectionInfo = entity.ConnectionInfo;
+                    file.UpdatedBy = updatedBy;
+                    file.UpdatedDate = DateTime.Now;
                     await context.SaveChangesAsync();
 
                 }

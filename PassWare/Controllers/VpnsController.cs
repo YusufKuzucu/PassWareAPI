@@ -30,6 +30,16 @@ namespace PassWare.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("GetByVpn")]
+        public async Task<IActionResult> GetByVpn(int id)
+        {
+            var result = await _vpnService.GetByVpn(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("Get")]
         public async Task<IActionResult> GetVpn(int id)
         {

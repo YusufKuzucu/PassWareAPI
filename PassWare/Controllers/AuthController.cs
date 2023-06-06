@@ -55,7 +55,7 @@ namespace PassWare.Controllers
                 return Ok(result.Data);
             }
             _logger.LogError($"Register process NOT OK. Data : {result.Message}");
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
         [HttpPost("forgotmypassword")]
         public ActionResult ForgotMyPassword(string email)

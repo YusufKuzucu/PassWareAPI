@@ -36,6 +36,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Vpn>>( await _vpnDal.GetAllAsync());
         }
 
+        public async Task<IDataResult<List<Vpn>>> GetByVpn(int id)
+        {
+            return new SuccessDataResult<List<Vpn>>(await _vpnDal.GetAllAsync(x=>x.ProjectId==id));
+        }
+
         public async Task<IDataResult<Vpn>> GetVpn(int id)
         {
             return new SuccessDataResult<Vpn>( await _vpnDal.GetAsync(p=>p.Id==id));

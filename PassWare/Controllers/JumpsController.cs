@@ -32,6 +32,17 @@ namespace PassWare.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("GetByJump")]
+        public async Task<IActionResult> GetByJump(int id)
+        {
+
+            var result = await _jumpService.GetByJump(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpPost("Post")]
         public async Task<IActionResult> PostJump(Jump jump, string createdBy)
         {

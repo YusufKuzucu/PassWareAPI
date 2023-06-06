@@ -50,7 +50,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (PASSWareDbContext context = new PASSWareDbContext())
             {
-                return await context.Set<UI>().SingleOrDefaultAsync();
+                return await context.Set<UI>().SingleOrDefaultAsync(filter);
             }
         }
 

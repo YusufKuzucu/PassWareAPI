@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Link:IEntity
+    public class Files:IEntity
     {
         [Key]
         public int Id { get; set; }

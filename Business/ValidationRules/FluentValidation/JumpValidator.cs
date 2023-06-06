@@ -12,7 +12,6 @@ namespace Business.ValidationRules.FluentValidation
     {
         public JumpValidator()
         {
-            RuleFor(p => p.JumpServerIP).NotEmpty();
            
         }
     }
