@@ -45,12 +45,13 @@ namespace PassWare.Controllers
         [HttpGet("Get")]
         public async Task<IActionResult> GetFile(int id)
         {
-            var result = await _filesService.GetFiles(id);
+
+            var result = await _filesService.GetFile(id);
             if (result.Success)
             {
-                return Ok(result);
+                return File(result.Data, "application/octet-stream"); // Dosya içeriğini byte dizisi olarak döndürüyoruz
             }
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
         [HttpPost("Post")]
         public async Task<IActionResult> PostFile(Files files, string createdBy)

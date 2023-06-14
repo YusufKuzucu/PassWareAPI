@@ -15,6 +15,7 @@ namespace Business.Abstract
         Task<IResult> UpdateFiles(Files files, string updatedBy);
         Task<IDataResult<List<Files>>> GetAllFiles();
         Task<IDataResult<Files>> GetFiles(int id);
+        Task<IDataResult<byte[]>> GetFile(int id);
         Task<IDataResult<List<Files>>> GetByFiles(int id);
     }
 }

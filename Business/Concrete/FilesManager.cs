@@ -40,6 +40,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Files>>(await _filesDal.GetAllAsync(x=>x.ProjectId==id));
         }
 
+        public async Task<IDataResult<byte[]>> GetFile(int id)
+        {
+            var file = await _filesDal.GetAsync(x => x.ProjectId == id);
+            if (file != null && file.ConnectionInfo != null)
+            {
+                return new SuccessDataResult<byte[]>(file.ConnectionInfo);
+            }
+            return new ErrorDataResult<byte[]>("Dosya bulunamadı.");
+        }
+
         public async Task<IDataResult<Files>> GetFiles(int id)
         {
             return new SuccessDataResult<Files>(await _filesDal.GetAsync(p => p.Id == id));
