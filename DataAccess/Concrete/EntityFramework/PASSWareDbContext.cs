@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=YUSUF_KUZUCU\\SQLEXPRESS;Initial Catalog=PassWare;User Id=yusuf;Password=123456;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("");
             //optionsBuilder.EnableSensitiveDataLogging();
         }
     }

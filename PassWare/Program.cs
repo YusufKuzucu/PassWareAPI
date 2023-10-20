@@ -21,7 +21,7 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         var config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-
+        
         SetLogging(builder, config);
 
 
@@ -29,6 +29,7 @@ public static class Program
         {
             builder.RegisterModule(new AutofacBusinessModule());
         });
+
 
         var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
